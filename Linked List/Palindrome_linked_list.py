@@ -1,0 +1,47 @@
+# Input: head = [1,2,2,1]
+# Output: true
+# tc=n/2(finding middle of ll)+n/2(reversing the second half)+n/2(for comparing ) ==n
+#sc=1
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+from sqlalchemy import false
+
+
+class Solution:
+    def isPalindrome(self, head: Optional[ListNode]) -> bool:
+        
+        
+        #finding middle of ll
+        slow,fast=head,head
+        while fast and fast.next:
+            slow=slow.next
+            fast=fast.next.next
+        #the slow pointer will be pointing to middle of ll
+        #reversing the 2nd half ll
+        prev=None
+        while slow:
+            tmp=slow.next
+            slow.next=prev
+            prev=slow
+            slow=tmp
+        # compare the first and second half nodes
+        #prev is the 1st node of second half reversed list
+        while prev:
+            if prev.val != head.val:
+                return False
+            prev = prev.next
+            head = head.next
+        return True
+
+        
+
+
+
+
+
+
+        
